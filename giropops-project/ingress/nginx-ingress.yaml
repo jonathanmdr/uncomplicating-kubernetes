@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+  namespace: ingress
+spec:
+  rules:
+  - host: elb-k8s.us-east-1.elb.amazonaws.com # This is fake address
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/nginx_status"
+        backend:
+          service:
+            name: nginx-ingress
+            port:
+              number: 18080
